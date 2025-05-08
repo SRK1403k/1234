@@ -1,0 +1,39 @@
+//1 Search.java
+
+import java.rmi.*;
+public interface Search extends Remote {
+// Declaring the method prototype
+public String query(String search) throws
+RemoteException;
+}
+
+//2 SearchQuery.java
+
+import java.rmi.*;
+import java.rmi.server.*;
+public class SearchQuery extends UnicastRemoteObject
+implements Search
+{
+// Implementation of the query interface
+public String query(String search)
+throws RemoteException
+{
+String result;
+if (search.equals("Reflection in Java"))
+result = "Found";
+else
+result = "Not Found";
+return result; } }
+
+#javac SearchQuery.java
+#rmic SearchQuery
+#rmiregistry on console
+On console-1:
+Compile Server Application:
+#javac Server.java
+#java Server
+On console-2:
+Compile Client Application:
+#javac Client.java
+#java Client
+
