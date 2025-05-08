@@ -1,0 +1,24 @@
+//Calc.idl
+
+module CalcApp
+{
+interface Calc
+{
+exception DivisionByZero {};
+float sum(in float a, in float b);
+float div(in float a, in float b) raises (DivisionByZero);
+float mul(in float a, in float b);
+float sub(in float a, in float b);
+};
+};
+
+
+1) idlj -fall Calc.idl
+2) javac -Xlint .java CalcApp/.java
+3) orbd -ORBInitialPort 1050&
+At 2nd Console
+1) javac CalcServer.java
+2) java CalcServer -ORBInitialPort 1050&
+At 3rd Console
+1) javac CalcClient.java
+2) java CalcClient -ORBInitialPort 1050
